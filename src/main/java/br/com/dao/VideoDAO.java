@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import br.com.entidades.Jogador;
 import br.com.entidades.Video;
 
 @Stateless
@@ -36,5 +37,27 @@ public class VideoDAO {
 			e.printStackTrace();
 		}	
 		return video;
+	}
+	
+	public void insere(Video v) {
+		try {
+			em.persist(v);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+	}
+	
+	public int buscarNovo() {
+		int id = -1;	
+		
+		try {
+			TypedQuery<Video> query  = em.createNamedQuery("consulta.buscaNovo", Video.class);
+			List<Video> lista = query.getResultList();
+			Video v = lista.get(0);
+			id = v.getId();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+		return id;
 	}
 }

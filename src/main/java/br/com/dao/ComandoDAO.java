@@ -28,6 +28,5 @@ public class ComandoDAO {
 		em.merge(comando);
 //		TypedQuery<Comando> query  = em.createNamedQuery("atualizarComando", Comando.class);	
 //		query.executeUpdate();
-	}
-	
+	}	
 }

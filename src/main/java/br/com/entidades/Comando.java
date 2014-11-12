@@ -15,6 +15,8 @@ public class Comando {
 	private Integer id;
 	
 	private boolean comando;
+	
+	private Integer idVideo;
 
 	public Integer getId() {
 		return id;
@@ -31,7 +33,13 @@ public class Comando {
 	public void setComando(boolean comando) {
 		this.comando = comando;
 	}
-	
-	
-	
+
+	public Integer getIdVideo() {
+		return idVideo;
+	}
+
+	public void setIdVideo(Integer idVideo) {
+		this.idVideo = idVideo;
+	}
+		
 }
