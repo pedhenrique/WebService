@@ -20,32 +20,54 @@ public class ComandoResource {
 	private ComandoDAO comandoDAO;
 	@EJB
 	private VideoDAO videoDAO;
-	
+
 	@GET
 	@Path("/produzirVideo")
-	public void atualizar() throws IOException{
+	public void atualizar() throws IOException {
 		Video video = new Video();
 		video.setPronto(false);
 		videoDAO.insere(video);
-		
+
 		Comando comando = new Comando();
 		comando.setId(1);
-		int idVideo = videoDAO.buscarNovo();
+		final int idVideo = videoDAO.buscarNovo();
 		comando.setIdVideo(idVideo);
-		comando.setComando(true);			
+		comando.setComando(true);
 		comandoDAO.atualizar(comando);
-				
-//		LocalShell shell = new LocalShell();
-//		video = videoDAO.buscar(idVideo);
-//		String cmd = "ffmpeg -i " + video.getPath() + " -acodec libfaac -b:a 128k -vcodec mpeg4 -b:v 1200k -flags +aic+mv4 /var/www/html/" + video.getId() + ".mp4";
-//		shell.executeCommand(cmd);
-//		cmd = "rm " + video.getPath();
-//		shell.executeCommand(cmd);
+
+		
+		new Thread() {
+
+			@Override
+			public void run() {
+				super.run();
+				Video v;
+				do {
+					try {
+						v = videoDAO.buscar(idVideo);
+						if (v.isPronto()) {
+							 LocalShell shell = new LocalShell();
+							 String cmd = "ffmpeg -i " + v.getPath() +
+							 " -acodec libfaac -b:a 128k -vcodec mpeg4 -b:v 1200k -flags +aic+mv4 /var/www/html/"
+							 + v.getNome();
+							 shell.executeCommand(cmd);
+							 cmd = "rm " + v.getPath();
+							 shell.executeCommand(cmd);
+							break;
+						}
+						sleep(1000);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				} while (true);
+			}
+
+		}.start();		
 	}
 
 	@GET
-	public String oi(){
-		
+	public String oi() {
+
 		return "Oi!";
 	}
 }

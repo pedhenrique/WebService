@@ -28,6 +28,8 @@ public class Video {
 	
 
 	private boolean pronto;
+	
+	private String nome;
 
 	public Video() {
 		this.path = "novo";
@@ -62,5 +64,12 @@ public class Video {
 		this.pronto = pronto;
 	}
 
-	
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
 }
