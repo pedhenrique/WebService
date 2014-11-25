@@ -47,6 +47,14 @@ public class VideoDAO {
 		}	
 	}
 	
+	public void atualizar(Video v){
+		try {
+			em.merge(v);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}		
+	}
+	
 	public int buscarNovo() {
 		int id = -1;	
 		

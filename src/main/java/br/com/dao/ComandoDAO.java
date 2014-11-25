@@ -25,7 +25,12 @@ public class ComandoDAO {
 	}
 	
 	public void atualizar(Comando comando){
-		em.merge(comando);
+		try {
+			em.merge(comando);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
 //		TypedQuery<Comando> query  = em.createNamedQuery("atualizarComando", Comando.class);	
 //		query.executeUpdate();
 	}	

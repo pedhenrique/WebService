@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
 	@NamedQuery(
 			name = "consulta.listarTodosVideos",
-			query = "select v from Video v"),
+			query = "select v from Video v WHERE v.pronto2 = true"),
     @NamedQuery(
     		name="consulta.buscaNovo",
             query="select v from Video v WHERE v.path = 'novo'"),
@@ -29,8 +29,19 @@ public class Video {
 
 	private boolean pronto;
 	
-	private String nome;
+	private boolean pronto2;
+	
+	
+	public boolean isPronto2() {
+		return pronto2;
+	}
 
+	public void setPronto2(boolean pronto2) {
+		this.pronto2 = pronto2;
+	}
+
+	private String nome;
+	
 	public Video() {
 		this.path = "novo";
 	}

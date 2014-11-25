@@ -30,11 +30,11 @@ public class LocalShell {
             
             String line;            
             while((line = br.readLine()) != null) {
-                System.out.println("Retorno do comando = [" + line + "]");
+                System.out.println("[ COMANDO ] : Retorno do comando = [" + line + "]");
             }
-            System.out.println("Rodou");
+            System.out.println("[ COMANDO ] : Comando executado.");
         } catch (IOException ioe) {
-            log.severe("Erro ao executar comando shell" + ioe.getMessage());
+            log.severe("[ COMANDO ] Erro: Erro ao executar comando shell" + ioe.getMessage());
             throw ioe;
         } finally {
             secureClose(br);
